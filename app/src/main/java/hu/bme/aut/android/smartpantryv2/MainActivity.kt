@@ -39,9 +39,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.recipes_page -> {
                     // Respond to navigation item 2 click
                     //itt most siman atmegy es csak vissza gombbal lehet tovabb menni
-                    val intent = Intent(this, RecipeListActivity::class.java).apply {}
-                    startActivity(intent)
-                    //makeCurrentFragment(RecipesFragment)
+                    //val intent = Intent(this, RecipeListActivity::class.java).apply {}
+                    //startActivity(intent)
+                    //ez a fragmentes
+                    makeCurrentFragment(RecipesFragment)
                 }
                 R.id.list_page -> {
                     // Respond to navigation item 2 click

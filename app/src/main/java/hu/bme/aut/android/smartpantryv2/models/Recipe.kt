@@ -2,8 +2,14 @@ package hu.bme.aut.android.smartpantry.models
 
 import com.squareup.moshi.Json
 
+data class Response(
+    val httpCode: Int? = null,
+    val meals: List<Recipe?>? = null
+)
+
 data class Recipe(
-    @Json(name = "idMeal") val id: String,
+    //@Json(name = "idMeal") val id: String,
+    val idMeal: String,
     val strMeal:String,
     val strDrinkAlternate:String,
     val strCategory:String,
