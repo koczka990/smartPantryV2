@@ -45,6 +45,7 @@ class GroceriesAdapter (private val mGroceries: List<Grocery>) : RecyclerView.Ad
         val textView1 = viewHolder.nameV
         textView1.text = grocery.name
         val textView2 = viewHolder.quantityV
+        textView2.setText(grocery.quantity.toString())
         //textView2. //TODO valahogy mashogy megjeleniteni az adatot az adatot ha van jobb
         val textView3 = viewHolder.measurementV
         textView3.text = grocery.measreIn
