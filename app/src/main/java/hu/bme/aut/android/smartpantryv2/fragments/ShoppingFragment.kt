@@ -29,7 +29,8 @@ class ShoppingFragment : Fragment() {
         //FragmentPantryBinding = binding
         val rvGroceries = binding.recyclerViewPantry
         groceries = Grocery.createBaseList(20)
-        val adapter = GroceriesAdapter(groceries)
+        //val adapter = GroceriesAdapter(groceries)
+        val adapter = GroceriesAdapter()
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(activity)
     }

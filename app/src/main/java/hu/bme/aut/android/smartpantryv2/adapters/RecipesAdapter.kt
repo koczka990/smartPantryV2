@@ -28,8 +28,6 @@ class RecipesAdapter(private val mRecipes: List<Recipe>) : RecyclerView.Adapter<
         val categoryT = holder.categoryV
         nameT.text = recipe.strMeal
         categoryT.text = recipe.strCategory
-        //TODO innen kell folytatni
-        TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int {

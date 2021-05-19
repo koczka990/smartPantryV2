@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.android.smartpantry.adapters.RecipesAdapter
 import hu.bme.aut.android.smartpantry.models.Recipe
+import hu.bme.aut.android.smartpantry.models.Response
 import hu.bme.aut.android.smartpantry.network.RecipeInteractor
 import hu.bme.aut.android.smartpantryv2.R
 import hu.bme.aut.android.smartpantryv2.databinding.FragmentRecipesBinding
@@ -53,10 +54,10 @@ class RecipesFragment : Fragment() {
         recipeInteractor.getRecipes(onSuccess = this::showRecipes, onError = this::showError)
     }
 
-    private fun showRecipes(recipes: List<Recipe>) {
+    private fun showRecipes(recipes: Response) {
 
         Log.d("SHOWRESULT", "showResult()")
-       adapter = RecipesAdapter(recipes)
+       adapter = RecipesAdapter(recipes.meals as List<Recipe>)
         val rvRecipes = binding.recyclerViewRecipes
        rvRecipes.adapter = adapter
         rvRecipes.layoutManager = LinearLayoutManager(activity)

@@ -2,9 +2,11 @@ package hu.bme.aut.android.smartpantry.network
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import hu.bme.aut.android.smartpantry.models.Recipe
+import hu.bme.aut.android.smartpantry.models.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -34,6 +36,7 @@ class RecipeInteractor {
         thread {
             try {
                 val response = call.execute().body()!!
+                Log.d("RESPONSE", response.toString())
                 handler.post { onSuccess(response) }
 
             } catch (e: Exception) {
@@ -44,9 +47,10 @@ class RecipeInteractor {
     }
 
     fun getRecipes(
-            onSuccess: (List<Recipe>) -> Unit,
-            onError: (Throwable) -> Unit
+        onSuccess: (Response) -> Unit,
+        onError: (Throwable) -> Unit
     ) {
+        Log.d("GETRECIPES", "getRecipes()")
         val getImagesRequest = recipeAPI.getRecipes()
         runCallOnBackgroundThread(getImagesRequest, onSuccess, onError)
     }
