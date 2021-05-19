@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.smartpantry.adapters.GroceriesAdapter
 import hu.bme.aut.android.smartpantry.models.Grocery
 import hu.bme.aut.android.smartpantryv2.R
+import hu.bme.aut.android.smartpantryv2.adapters.ShoppingAdapter
 import hu.bme.aut.android.smartpantryv2.databinding.FragmentPantryBinding
+import hu.bme.aut.android.smartpantryv2.viewmodel.GroceryViewModel
 
-class ShoppingFragment : Fragment() {
+class ShoppingFragment(private val groceries: ArrayList<Grocery>, private val adapter: ShoppingAdapter) : Fragment() {
 
-    lateinit var groceries: ArrayList<Grocery>
+    //lateinit var groceries: ArrayList<Grocery>
+
+    //lateinit var adapter: ShoppingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +33,9 @@ class ShoppingFragment : Fragment() {
         val binding = FragmentPantryBinding.bind(view)
         //FragmentPantryBinding = binding
         val rvGroceries = binding.recyclerViewPantry
-        groceries = Grocery.createBaseList(20)
+        //groceries = Grocery.createBaseList(20)
         //val adapter = GroceriesAdapter(groceries)
-        val adapter = GroceriesAdapter()
+        //adapter = ShoppingAdapter(groceries)
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(activity)
     }

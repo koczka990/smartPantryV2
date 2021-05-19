@@ -9,5 +9,6 @@ data class RoomGrocery(
     val id: Int = 0,
     val name: String,
     val quantity: Int,
+    val toBuy: Int,
     val measreIn: String
 )

@@ -15,12 +15,9 @@ interface RecipesAPI {
 
     @GET("search.php?s=Chicken")
     fun getRecipes(): Call<Response>
-    //TODO megcsinalni hogy elfogadja a hivasra erkezo valaszt
-    //megvan kb hogy az lehet a baj hogy a hivas egy tombot adna vissza es azt valahogy szet kell szedni meglassuk
 
 
     fun getMealsByIngredient(ingredient : String) : String {
-        //TODO
         return ""
     }
 

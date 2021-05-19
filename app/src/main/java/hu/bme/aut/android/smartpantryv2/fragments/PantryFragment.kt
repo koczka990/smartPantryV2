@@ -8,19 +8,20 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.smartpantry.adapters.GroceriesAdapter
 import hu.bme.aut.android.smartpantry.models.Grocery
 import hu.bme.aut.android.smartpantryv2.R
 import hu.bme.aut.android.smartpantryv2.databinding.FragmentPantryBinding
 import hu.bme.aut.android.smartpantryv2.viewmodel.GroceryViewModel
 
-class PantryFragment : Fragment() {
+class PantryFragment(private val groceries: ArrayList<Grocery>, private val adapter: GroceriesAdapter ) : Fragment() {
 
    // private var pantryFragmentBinding: FragmentPantryBinding? = null
-    lateinit var groceries: ArrayList<Grocery>
+    //lateinit var groceries: ArrayList<Grocery>
 
-    private lateinit var groceryViewModel: GroceryViewModel
-    private lateinit var rvGroceries: GroceriesAdapter
+    //private lateinit var groceryViewModel: GroceryViewModel
+    //lateinit var adapter: GroceriesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +36,14 @@ class PantryFragment : Fragment() {
         val binding = FragmentPantryBinding.bind(view)
         //FragmentPantryBinding = binding
         val rvGroceries = binding.recyclerViewPantry
-        groceries = Grocery.createBaseList(20)
-        val adapter = GroceriesAdapter()
+        //groceries = Grocery.createBaseList(20)
+        //adapter = GroceriesAdapter(groceries)
 
-        groceryViewModel = ViewModelProvider(this).get(GroceryViewModel::class.java)
-        groceryViewModel.allGroceries.observe(this, {groceries ->
-            adapter.submitList(groceries)
-        })
+//        groceryViewModel = ViewModelProvider(this).get(GroceryViewModel::class.java)
+//        groceryViewModel.allGroceries.observe(this, {grocer ->
+//            groceries = grocer as ArrayList<Grocery>
+//            adapter.notifyDataSetChanged()
+//       })
 
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(activity)

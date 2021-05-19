@@ -28,6 +28,7 @@ class Repository(private val groceryDao: GroceryDao){
             id = id,
             name = name,
             quantity = quantity,
+            toBuy = toBuy,
             measreIn = measreIn
         )
     }
@@ -36,6 +37,7 @@ class Repository(private val groceryDao: GroceryDao){
         return RoomGrocery(
             name = name,
             quantity = quantity,
+            toBuy = toBuy,
             measreIn = measreIn
         )
     }
