@@ -24,4 +24,12 @@ class GroceryViewModel : ViewModel() {
         repository.insert(grocery)
     }
 
+    fun update(grocery: Grocery) = viewModelScope.launch {
+        repository.update(grocery)
+    }
+
+    fun updater(grocery: Grocery) = viewModelScope.launch {
+        repository.update(grocery)
+    }
+
 }

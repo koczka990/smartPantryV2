@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +16,15 @@ import hu.bme.aut.android.smartpantryv2.R
 import hu.bme.aut.android.smartpantryv2.databinding.FragmentPantryBinding
 import hu.bme.aut.android.smartpantryv2.viewmodel.GroceryViewModel
 
-class PantryFragment(private val groceries: ArrayList<Grocery>, private val adapter: GroceriesAdapter ) : Fragment() {
+class PantryFragment(var groceryViewModel: GroceryViewModel) : Fragment() {
 
    // private var pantryFragmentBinding: FragmentPantryBinding? = null
     //lateinit var groceries: ArrayList<Grocery>
 
     //private lateinit var groceryViewModel: GroceryViewModel
-    //lateinit var adapter: GroceriesAdapter
+    lateinit var adapter: GroceriesAdapter
+    //lateinit var rvGroceries: RecyclerView
+    //val rvGroceries: RecyclerView = view!!.findViewById(R.id.recycler_view_pantry)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +34,25 @@ class PantryFragment(private val groceries: ArrayList<Grocery>, private val adap
         return inflater.inflate(R.layout.fragment_pantry, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = GroceriesAdapter(groceryViewModel)
+        groceryViewModel = ViewModelProvider(this).get(GroceryViewModel::class.java)
+        groceryViewModel.allGroceries.observe(this, {groceries ->
+            adapter.submitList(groceries)
+        })
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentPantryBinding.bind(view)
         //FragmentPantryBinding = binding
-        val rvGroceries = binding.recyclerViewPantry
-        //groceries = Grocery.createBaseList(20)
-        //adapter = GroceriesAdapter(groceries)
 
-//        groceryViewModel = ViewModelProvider(this).get(GroceryViewModel::class.java)
-//        groceryViewModel.allGroceries.observe(this, {grocer ->
-//            groceries = grocer as ArrayList<Grocery>
-//            adapter.notifyDataSetChanged()
-//       })
+        //groceries = Grocery.createBaseList(20)
+        //val adapter = GroceriesAdapter()
+        val rvGroceries = binding.recyclerViewPantry
 
         rvGroceries.adapter = adapter
         rvGroceries.layoutManager = LinearLayoutManager(activity)

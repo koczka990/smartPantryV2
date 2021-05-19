@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.smartpantry.adapters.GroceriesAdapter
 import hu.bme.aut.android.smartpantry.fragments.PantryFragment
 import hu.bme.aut.android.smartpantry.fragments.RecipesFragment
@@ -24,8 +27,16 @@ class MainActivity : AppCompatActivity(), GroceryCreateFragment.GroceryCreatedLi
 
     private lateinit var binding : ActivityMainBinding
 
-    lateinit var groceries: ArrayList<Grocery>
+    //lateinit var groceries: List<Grocery>
     lateinit var groceryViewModel: GroceryViewModel
+
+    //lateinit var pantryFragment: PantryFragment
+    //lateinit var shoppingFragment: ShoppingFragment
+    //private lateinit var groceriesAdapter: GroceriesAdapter
+    //private lateinit var shoppingAdapter: ShoppingAdapter
+
+    private lateinit var pantryFragment: PantryFragment
+    private lateinit var shoppingFragment: ShoppingFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,32 +44,18 @@ class MainActivity : AppCompatActivity(), GroceryCreateFragment.GroceryCreatedLi
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //////////////// IDE jon most a proba
-
-        ////////////////
-        groceries = Grocery.createBaseList(20)
-        val sAdapter = ShoppingAdapter(groceries)
-        val gAdapter = GroceriesAdapter(groceries)
-        val PantryFragment = PantryFragment(groceries, gAdapter)
-        val RecipesFragment = RecipesFragment()
-        val ShoppingFragment = ShoppingFragment(groceries, sAdapter)
-
-        /////////////
         groceryViewModel = ViewModelProvider(this).get(GroceryViewModel::class.java)
-        groceryViewModel.allGroceries.observe(this, {grocer ->
-            groceries = grocer as ArrayList<Grocery>
-            gAdapter.notifyDataSetChanged()
-            sAdapter.notifyDataSetChanged()
-        })
-        //////////////////
-
-        makeCurrentFragment(PantryFragment)
+        val RecipesFragment = RecipesFragment()
+        pantryFragment = PantryFragment(groceryViewModel)
+        shoppingFragment = ShoppingFragment(groceryViewModel)
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.title = title
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.pantry_page -> {
                     // Respond to navigation item 1 click
-                    makeCurrentFragment(PantryFragment)
+                    makeCurrentFragment(pantryFragment)
                 }
                 R.id.recipes_page -> {
                     // Respond to navigation item 2 click
@@ -70,14 +67,25 @@ class MainActivity : AppCompatActivity(), GroceryCreateFragment.GroceryCreatedLi
                 }
                 R.id.list_page -> {
                     // Respond to navigation item 2 click
-                    makeCurrentFragment(ShoppingFragment)
+                    makeCurrentFragment(shoppingFragment)
                 }
             }
             true
-
         }
 
+        //setupRecyclerViews()
+        makeCurrentFragment(pantryFragment)
     }
+
+//    private fun setupRecyclerViews(){
+//        groceriesAdapter = GroceriesAdapter()
+//        pantryFragment.rvGroceries.adapter = groceriesAdapter
+//
+//        shoppingAdapter = ShoppingAdapter()
+//        //shoppingFragment.view!!.findViewById<RecyclerView>(R.id.recycler_view_pantry).adapter = shoppingAdapter
+//        //shoppingFragment.view!!.findViewById<RecyclerView>(R.id.recycler_view_pantry).layoutManager = LinearLayoutManager(this)
+//        shoppingFragment.rvGroceries.adapter = shoppingAdapter
+//    }
 
     private fun makeCurrentFragment(fragment: Fragment) =
             supportFragmentManager.beginTransaction().apply {
@@ -102,5 +110,10 @@ class MainActivity : AppCompatActivity(), GroceryCreateFragment.GroceryCreatedLi
     override fun onGroceryCreated(grocery: Grocery){
         groceryViewModel.insert(grocery)
     }
+
+//    fun onGroceryUpdated(grocery: Grocery){
+//        groceryViewModel.update(grocery)
+//    }
+
 
 }

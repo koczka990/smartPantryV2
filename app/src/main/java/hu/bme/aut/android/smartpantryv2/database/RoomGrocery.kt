@@ -8,7 +8,7 @@ data class RoomGrocery(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val quantity: Int,
-    val toBuy: Int,
+    var quantity: Int,
+    var toBuy: Int,
     val measreIn: String
 )

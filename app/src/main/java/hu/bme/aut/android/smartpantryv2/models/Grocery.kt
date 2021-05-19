@@ -1,6 +1,6 @@
 package hu.bme.aut.android.smartpantry.models
 
-class Grocery (val id: Int, val name: String, val quantity: Int, val toBuy: Int, val measreIn: String) {
+class Grocery (val id: Int, val name: String, var quantity: Int, var toBuy: Int, val measreIn: String) {
 
     companion object {
         val baseIngredients = arrayOf("Potato", "Chicken", "Paprika", "Basil", "Tomato", "Ketchup", "Beef", "Pork", "Onion", "Wine", "Sugar", "Salt")

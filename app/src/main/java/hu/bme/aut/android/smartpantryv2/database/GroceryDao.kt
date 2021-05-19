@@ -5,6 +5,7 @@ import androidx.room.*
 
 @Dao
 interface GroceryDao{
+
     @Insert
     fun insertGrocery(grocery: RoomGrocery)
 
@@ -16,4 +17,10 @@ interface GroceryDao{
 
     @Delete
     fun deleteGrocery(grocery: RoomGrocery)
+
+    @Query("UPDATE grocerytable SET toBuy = :value WHERE id == :id")
+    fun setToBuy(id: Int?, value: Int?)
+
+    @Query("DELETE FROM grocerytable")
+    fun deleteAllGroceries()
 }

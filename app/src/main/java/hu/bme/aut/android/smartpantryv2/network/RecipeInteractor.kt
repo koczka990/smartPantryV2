@@ -36,7 +36,7 @@ class RecipeInteractor {
         thread {
             try {
                 val response = call.execute().body()!!
-                Log.d("RESPONSE", response.toString())
+                //Log.d("RESPONSE", response.toString())
                 handler.post { onSuccess(response) }
 
             } catch (e: Exception) {

@@ -23,6 +23,14 @@ class Repository(private val groceryDao: GroceryDao){
         groceryDao.insertGrocery(grocery.toRoomModel())
     }
 
+    suspend fun update(grocery: Grocery) = withContext(Dispatchers.IO){
+        groceryDao.setToBuy(grocery.id, grocery.toBuy)
+    }
+
+    suspend fun updater(grocery: Grocery) = withContext(Dispatchers.IO){
+        groceryDao.updateGrocery(grocery.toRoomModel())
+    }
+
     private fun RoomGrocery.toDomainModel(): Grocery {
         return Grocery(
             id = id,

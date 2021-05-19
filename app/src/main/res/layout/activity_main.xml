@@ -10,13 +10,13 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.SmartPantryV2.PopupOverlay">
+        android:theme="@style/Theme.SmartPantryV2.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.SmartPantryV2.AppBarOverlay" />
+            app:popupTheme="@style/Theme.SmartPantryV2.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

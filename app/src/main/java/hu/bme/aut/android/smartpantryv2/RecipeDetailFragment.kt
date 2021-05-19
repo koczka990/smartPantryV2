@@ -1,5 +1,7 @@
 package hu.bme.aut.android.smartpantryv2
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import hu.bme.aut.android.smartpantry.models.Recipe
 import hu.bme.aut.android.smartpantryv2.dummy.DummyContent
 
 /**
@@ -25,12 +28,14 @@ class RecipeDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        
+
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+
                 activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.content
             }
         }
